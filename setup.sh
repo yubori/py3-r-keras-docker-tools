@@ -15,5 +15,9 @@ do
 	chmod +x "$SH_FIKE_FULLPATH"
 done
 
+ln -s "${SCRIPT_DIR}/local_bin/run.r.sh ${LOCAL_BIN}/run.r"
+ln -s "${SCRIPT_DIR}/local_bin/run.py.sh ${LOCAL_BIN}/run.py"
+ln -s "${SCRIPT_DIR}/local_bin/run.bash.sh ${LOCAL_BIN}/run.bash"
+
 DOCKER_CNT=$(cat $SCRIPT_DIR/local_bin/docker_cnt.txt)
 sudo docker build dockers/tf-gpu-py3-r-keras -t $DOCKER_CNT
