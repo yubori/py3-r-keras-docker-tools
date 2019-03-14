@@ -3,10 +3,9 @@ It is a tools to run keras_tensorflow-gpu with python3 or r through docker. The 
 
 # Usage
 ## Setup
-run setup.sh
-
-add ~/.local/bin to your PATH
-add your user to docker group
+- run setup.sh
+- add ~/.local/bin to your PATH
+- add your user to docker group
 
 ## run your script
 run your_r_script on GPU0
