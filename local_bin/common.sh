@@ -3,11 +3,15 @@ SCRIPT_FULL_PATH=$(readlink -f $0)
 SCRIPT_DIR=$(dirname $SCRIPT_FULL_PATH)
 DOCKER_CNT=$(cat $SCRIPT_DIR/docker_cnt.txt)
 
+SU=0
 CUDA_DEV=
-while getopts "d:" opt; do
+while getopts "d:s" opt; do
     case "$opt" in
         d)
             CUDA_DEV="NVIDIA_VISIBLE_DEVICES=$OPTARG"
+            ;;
+        s)
+            SU=1
             ;;
     esac
 done
@@ -15,7 +19,11 @@ done
 shift `expr $OPTIND - 1`
 
 CUR_DIR=$(pwd)
-DOC_OPT="-u $(id -u):$(id -g) -w $CUR_DIR -i --rm -v $CUR_DIR:$CUR_DIR"
+DOC_OPT="-u $(id -u):$(id -g)"
+if [ $SU -eq 1 ]; then
+    DOC_OPT=""
+fi
+DOC_OPT="$DOC_OPT -w $CUR_DIR -i --rm -v $CUR_DIR:$CUR_DIR"
 
 if [ -e "$(tty)" ]; then
 	DOC_OPT="$DOC_OPT -t"
@@ -27,5 +35,4 @@ then
 fi
 
 echo "DOC_OPT: $DOC_OPT"
-
 

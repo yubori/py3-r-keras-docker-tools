@@ -1,1 +1,1 @@
-tf-gpu-py3-r-keras:1.2
+tf-gpu-py3-r-keras:1.3
