@@ -3,10 +3,14 @@ SCRIPT_FULL_PATH=$(readlink -f $0)
 SCRIPT_DIR=$(dirname $SCRIPT_FULL_PATH)
 DOCKER_CNT=$(cat $SCRIPT_DIR/docker_cnt.txt)
 
+LOOP=0
 SU=0
 CUDA_DEV=
-while getopts "d:s" opt; do
+while getopts "ld:s" opt; do
     case "$opt" in
+        l)
+            LOOP=1
+            ;;
         d)
             CUDA_DEV="NVIDIA_VISIBLE_DEVICES=$OPTARG"
             ;;
