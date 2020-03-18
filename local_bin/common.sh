@@ -6,7 +6,7 @@ DOCKER_CNT=$(cat $SCRIPT_DIR/docker_cnt.txt)
 LOOP=0
 SU=0
 CUDA_DEV=
-while getopts "ld:s" opt; do
+while getopts "ld:sc:" opt; do
     case "$opt" in
         l)
             LOOP=1
@@ -16,6 +16,9 @@ while getopts "ld:s" opt; do
             ;;
         s)
             SU=1
+            ;;
+        c)
+            DOCKER_CNT="$OPTARG"
             ;;
     esac
 done
